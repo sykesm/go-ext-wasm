@@ -27,7 +27,7 @@
 #  define DEPRECATED(message) __declspec(deprecated(message))
 #endif
 
-#define WASMER_WASI_ENABLED
+#define WASMER_EMSCRIPTEN_ENABLED
 #endif // WASMER_H_MACROS
 
 
@@ -924,7 +924,7 @@ void *wasmer_instance_context_data_get(const wasmer_instance_context_t *ctx);
  * // Allocate them and set them on the given instance.
  * my_data *data = malloc(sizeof(my_data));
  * data->… = …;
- * wasmer_instance_context_data_set(instance, (void*) my_data);
+ * wasmer_instance_context_data_set(instance, (void*) data);
  *
  * // You can read your data.
  * {
@@ -1171,7 +1171,7 @@ uint8_t *wasmer_memory_data(const wasmer_memory_t *memory);
  * uint32_t memory_data_length = wasmer_memory_data_length(memory);
  * ```
  */
-uint32_t wasmer_memory_data_length(wasmer_memory_t *memory);
+uint32_t wasmer_memory_data_length(const wasmer_memory_t *memory);
 
 /**
  * Frees memory for the given `wasmer_memory_t`.
@@ -1386,6 +1386,8 @@ wasmer_result_t wasmer_table_new(wasmer_table_t **table, wasmer_limits_t limits)
 #if (!defined(_WIN32) && defined(ARCH_X86_64))
 /**
  * Adds a callinfo trampoline to the builder.
+ *
+ * Deprecated. In a future version `DynamicFunc::new` will be exposed to the C API and should be used instead of this function.
  */
 uintptr_t wasmer_trampoline_buffer_builder_add_callinfo_trampoline(wasmer_trampoline_buffer_builder_t *builder,
                                                                    const wasmer_trampoline_callable_t *func,

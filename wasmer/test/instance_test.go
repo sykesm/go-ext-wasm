@@ -1,11 +1,12 @@
 package wasmertest
 
 import (
-	"github.com/stretchr/testify/assert"
-	wasm "github.com/wasmerio/go-ext-wasm/wasmer"
 	"path"
 	"runtime"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	wasm "github.com/wasmerio/go-ext-wasm/wasmer"
 )
 
 func GetBytes() []byte {
@@ -37,7 +38,7 @@ func TestInstantiateInvalidModule(t *testing.T) {
 	instance, err := wasm.NewInstance(GetInvalidBytes())
 	defer instance.Close()
 
-	assert.EqualError(t, err, "Failed to instantiate the module:\n    compile error: Validation error \"Invalid type\"")
+	assert.EqualError(t, err, "Failed to instantiate the module:\n    Validation error \"Invalid type\"")
 }
 
 func TestBasicSum(t *testing.T) {

@@ -1,7 +1,8 @@
 package wasmer
 
+// #cgo CFLAGS: -I${SRCDIR} -DWASMER_WASI_ENABLED
 // #cgo LDFLAGS: -Wl,-rpath,${SRCDIR} -L${SRCDIR} -lwasmer
-// #include "./wasmer.h"
+// #include "wasmer.h"
 //
 import "C"
 import "unsafe"
